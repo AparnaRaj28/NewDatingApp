@@ -1,0 +1,23 @@
+<div class="justify-content-center">
+<form #registerForm = "ngForm" (ngSubmit)="OnSubmitForm()">
+   <h2 class="text-primary text-center">Sign Up</h2>
+   <hr>
+   <input type="text"
+          class="form-control" 
+          name="username"
+          [(ngModel)] ="model.username"
+          placeholder="Username">
+    <br>
+   <input type="password" 
+          class="form-control"
+           name="password"
+           [(ngModel)] ="model.password"
+           placeholder="Password"
+          >
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="cancelForm()">Cancel</button>
+    </div>
+  
+</form>
+</div>

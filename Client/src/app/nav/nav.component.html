@@ -1,28 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">Dating App</a>
+      <a class="navbar-brand" routerLink="/">Dating App</a>
 
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isLoggedIn">       
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">       
             <li class="nav-item">
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Lists</a>
+                <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Messages</a>
+                <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
               </li>
 
          
         </ul>
-        <div class="dropdown" *ngIf="isLoggedIn" dropdown>
-            <a class="dropdown-toggle text-light" dropdownToggle >Welcome user</a>
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+            <a class="dropdown-toggle text-light" dropdownToggle >Welcome {{user.userName | titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item">Edit Profile</a>
                 <a class="dropdown-item" (click)="logout()">logout</a>
             </div>
         </div>
-        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!isLoggedIn">
+        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser$ | async)">
           <input class="form-control me-2" 
                 type="text" placeholder="Username"
                 name="username" id="username" 
