@@ -2,6 +2,7 @@ using System.Text;
 using API.Data;
 using API.Extensions;
 using API.Interface;
+using API.Middleware;
 using API.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>(); //middleware for exception handling
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
